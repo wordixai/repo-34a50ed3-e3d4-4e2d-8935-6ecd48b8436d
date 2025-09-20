@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One:wght@400&family=Comic+Neue:wght@400;700&display=swap');
+
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 The @apply directive should not be used with the group utility class.
@@ -9,10 +11,248 @@ The @apply directive should not be used with the group utility class.
 
 @layer base {
   :root {
-   
+    /* Pop Art Color Palette */
+    --pop-orange: 25 100% 55%;
+    --pop-pink: 320 100% 65%;
+    --pop-yellow: 48 100% 67%;
+    --pop-purple: 270 75% 60%;
+    --pop-blue: 200 100% 60%;
+    --pop-red: 355 85% 60%;
+    
+    /* Base Colors */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 15%;
+    
+    /* Primary Colors */
+    --primary: var(--pop-orange);
+    --primary-foreground: 0 0% 100%;
+    
+    /* Secondary Colors */
+    --secondary: var(--pop-pink);
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Accent Colors */
+    --accent: var(--pop-yellow);
+    --accent-foreground: 0 0% 15%;
+    
+    /* UI Colors */
+    --border: 0 0% 90%;
+    --input: 0 0% 95%;
+    --ring: var(--pop-orange);
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
+    --destructive: var(--pop-red);
+    --destructive-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 15%;
+    
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 15%;
+    --sidebar-primary: var(--pop-orange);
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 15%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: var(--pop-orange);
+    
+    --radius: 1rem;
   }
+}
 
-  .dark {
+/* Pop Art Typography */
+.font-comic {
+  font-family: 'Comic Neue', cursive;
+}
 
+.font-fredoka {
+  font-family: 'Fredoka One', cursive;
+}
+
+/* Dot Pattern Background */
+.dots-pattern {
+  background-image: radial-gradient(circle, hsl(var(--pop-pink)) 2px, transparent 2px);
+  background-size: 20px 20px;
+}
+
+.dots-pattern-orange {
+  background-image: radial-gradient(circle, hsl(var(--pop-orange)) 2px, transparent 2px);
+  background-size: 15px 15px;
+}
+
+.dots-pattern-small {
+  background-image: radial-gradient(circle, rgba(255,255,255,0.3) 1px, transparent 1px);
+  background-size: 10px 10px;
+}
+
+/* Pop Art Gradients */
+.gradient-pop {
+  background: linear-gradient(135deg, hsl(var(--pop-orange)) 0%, hsl(var(--pop-pink)) 100%);
+}
+
+.gradient-pop-reverse {
+  background: linear-gradient(135deg, hsl(var(--pop-pink)) 0%, hsl(var(--pop-orange)) 100%);
+}
+
+.gradient-rainbow {
+  background: linear-gradient(90deg, 
+    hsl(var(--pop-red)) 0%, 
+    hsl(var(--pop-orange)) 20%, 
+    hsl(var(--pop-yellow)) 40%, 
+    hsl(var(--pop-blue)) 60%, 
+    hsl(var(--pop-purple)) 80%, 
+    hsl(var(--pop-pink)) 100%
+  );
+}
+
+/* Comic Book Frames */
+.comic-frame {
+  border: 4px solid hsl(var(--foreground));
+  border-radius: 1rem;
+  position: relative;
+}
+
+.comic-frame::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  background: hsl(var(--pop-yellow));
+  border-radius: 1rem;
+  z-index: -1;
+  transform: rotate(-2deg);
+}
+
+.comic-frame-pink::before {
+  background: hsl(var(--pop-pink));
+  transform: rotate(2deg);
+}
+
+.comic-frame-blue::before {
+  background: hsl(var(--pop-blue));
+  transform: rotate(-1deg);
+}
+
+/* Bounce Animation */
+@keyframes bounce-fun {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0) rotate(0deg);
   }
+  40% {
+    transform: translateY(-10px) rotate(-2deg);
+  }
+  60% {
+    transform: translateY(-5px) rotate(1deg);
+  }
+}
+
+.bounce-fun {
+  animation: bounce-fun 2s infinite;
+}
+
+/* Wiggle Animation */
+@keyframes wiggle {
+  0%, 7% { transform: rotateZ(0); }
+  15% { transform: rotateZ(-15deg); }
+  20% { transform: rotateZ(10deg); }
+  25% { transform: rotateZ(-10deg); }
+  30% { transform: rotateZ(6deg); }
+  35% { transform: rotateZ(-4deg); }
+  40%, 100% { transform: rotateZ(0); }
+}
+
+.wiggle {
+  animation: wiggle 3s infinite;
+}
+
+/* Handwritten Text Effect */
+.handwritten {
+  font-family: 'Comic Neue', cursive;
+  transform: rotate(-1deg);
+  text-shadow: 2px 2px 0px hsl(var(--pop-yellow));
+}
+
+/* Speech Bubble */
+.speech-bubble {
+  position: relative;
+  background: hsl(var(--background));
+  border-radius: 1rem;
+  border: 3px solid hsl(var(--foreground));
+  padding: 1rem;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border: 15px solid transparent;
+  border-top-color: hsl(var(--foreground));
+  border-bottom: 0;
+  margin-left: -15px;
+}
+
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 20px;
+  width: 0;
+  height: 0;
+  border: 12px solid transparent;
+  border-top-color: hsl(var(--background));
+  border-bottom: 0;
+  margin-left: -12px;
+}
+
+/* Pop Art Button Styles */
+.btn-pop {
+  background: hsl(var(--pop-orange));
+  color: white;
+  border: 3px solid hsl(var(--foreground));
+  border-radius: 0.75rem;
+  font-family: 'Comic Neue', cursive;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  transform: translateY(0);
+  transition: all 0.2s ease;
+  box-shadow: 0 6px 0 hsl(var(--foreground));
+}
+
+.btn-pop:hover {
+  transform: translateY(2px);
+  box-shadow: 0 4px 0 hsl(var(--foreground));
+}
+
+.btn-pop:active {
+  transform: translateY(6px);
+  box-shadow: 0 0 0 hsl(var(--foreground));
+}
+
+.btn-pop-pink {
+  background: hsl(var(--pop-pink));
+}
+
+.btn-pop-blue {
+  background: hsl(var(--pop-blue));
+}
+
+.btn-pop-yellow {
+  background: hsl(var(--pop-yellow));
+  color: hsl(var(--foreground));
+}
+
+/* Halftone Effect */
+.halftone {
+  background-image: 
+    radial-gradient(circle at 25% 25%, hsl(var(--pop-pink)) 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, hsl(var(--pop-orange)) 2px, transparent 2px);
+  background-size: 20px 20px, 30px 30px;
 }
